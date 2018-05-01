@@ -5,9 +5,61 @@
     xmlns:local="using:TheWeather"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local1="using:TheWeather.Converters"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <local1:IntFormatter x:Key="IntConverter"/>
+        <DataTemplate x:Key="DayForecast">
+            <StackPanel HorizontalAlignment="Center" Grid.Row="0" Margin="30,0,30,0" VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center" Foreground="White" FontFamily="Avenir Next" FontWeight="Light" FontSize="16">Thursday</TextBlock>
+                <TextBlock HorizontalAlignment="Center" FontFamily="Avenir Next Demi Bold" FontSize="43" Foreground="White" FontWeight="SemiBold">+15°</TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="345"/>
+            <RowDefinition/>
+            <RowDefinition Height="185"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="{x:Bind cowerUrl}"/>
+        </Grid.Background>
+        <Rectangle Fill="#ffffff" Opacity="0.25" Stretch="UniformToFill" Grid.RowSpan="3"/>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="0" VerticalAlignment="Center">
+            <TextBlock Text="{x:Bind weatherData.Name}" HorizontalAlignment="Center" Foreground="White" FontFamily="Avenir Next" FontWeight="Light" FontSize="36"/>
+            <Image Source="Assets/LineH.png" HorizontalAlignment="Center" Height="3" Width="230" Margin="0,10,0,10" Opacity="0.7"/>
+            <TextBlock HorizontalAlignment="Center" FontFamily="Avenir Next Demi Bold" FontSize="72" Foreground="White" VerticalAlignment="Center" FontWeight="SemiBold">
+                <Run Text="{x:Bind weatherData.Main.Temp, Converter={StaticResource IntConverter}}"/><Run FontSize="56" FontWeight="Normal">°C</Run>
+            </TextBlock>
+            <Image Source="Assets/LineH.png" HorizontalAlignment="Center" Height="3" Width="230" Margin="0,10,0,10" Opacity="0.7"/>
+            <TextBlock Text="{x:Bind currentDate}" HorizontalAlignment="Center" Foreground="White" FontFamily="Avenir Next" FontWeight="Light" FontSize="18"/>
+        </StackPanel>
+        
+        <SwapChainPanel Grid.Row="1" x:Name="swapChainPanel"/>
+
+
+        <ItemsControl ItemsSource="{x:Bind weatherConditions, Mode=OneWay}" Grid.Row="2">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="local:WeatherState">
+                    <StackPanel HorizontalAlignment="Center" Margin="30,0,30,0" VerticalAlignment="Center">
+                        <TextBlock Text="{x:Bind DayName}" HorizontalAlignment="Center" Foreground="White" FontFamily="Avenir Next" FontWeight="Light" FontSize="16"/>
+                        <TextBlock HorizontalAlignment="Center" FontFamily="Avenir Next Demi Bold" FontSize="43" Foreground="White" FontWeight="SemiBold">
+                            <Run Text="{x:Bind AvDayTemp}"/><Run FontSize="36" FontWeight="Normal">°C</Run>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+        </ItemsControl>
+        
     </Grid>
 </Page>
