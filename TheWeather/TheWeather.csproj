@@ -116,7 +116,9 @@
     <Content Include="Assets\drawing.svg" />
     <Content Include="Assets\LineH.png" />
     <Content Include="Assets\LineW.png" />
+    <Content Include="Assets\sprtsh.png" />
     <Content Include="Assets\star.png" />
+    <Content Include="Assets\SunAnimation.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

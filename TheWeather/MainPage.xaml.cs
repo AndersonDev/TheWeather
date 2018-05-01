@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Net.Http;
 using Windows.UI.Xaml.Controls;
 using Effects;
+using System.Threading.Tasks;
+using Windows.UI.Xaml.Input;
 
 namespace TheWeather
 {
@@ -26,6 +28,23 @@ namespace TheWeather
             GetWeather();
             GetForecast();
             InitSwapChain();
+            Update();
+        }
+
+        private void SwapChainPanel_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            Windows.UI.Xaml.Input.Pointer ptr = e.Pointer;
+
+            if (ptr.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse)
+            {
+                // To get mouse state, we need extended pointer details.
+                // We get the pointer info through the getCurrentPoint method
+                // of the event argument. 
+                Windows.UI.Input.PointerPoint ptrPt = e.GetCurrentPoint(swapChainPanel);
+                r.SetPointerPoint(ptrPt);
+            }
+
+            e.Handled = true;
         }
 
         void InitSwapChain()
@@ -34,7 +53,7 @@ namespace TheWeather
             swapChainPanel.SizeChanged += (object sender, Windows.UI.Xaml.SizeChangedEventArgs e) =>
             {
                 r.SetLogicalSize(e.NewSize);
-                r.Draw();
+                //r.Draw();
             };
         }
 
@@ -42,6 +61,15 @@ namespace TheWeather
         {
             currentDate = DateTime.Now.Date.ToString("dd/MM/yyyy");
             Bindings.Update();
+        }
+
+        async Task Update()
+        {
+            while (true)
+            {
+                r.Draw();
+                await Task.Delay(40);
+            }
         }
 
         async void GetWeather()
@@ -117,7 +145,7 @@ namespace TheWeather
             cowerUrl = pixabayData.hits[0].largeImageURL;
 
             Bindings.Update();
-            r.Draw();
+            //r.Draw();
         }
     }
 }
