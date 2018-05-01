@@ -147,7 +147,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Effects\Effects\Effects.vcxproj">
+    <ProjectReference Include="..\Effects\Effects.vcxproj">
       <Project>{c9fe5439-6e2b-4fa6-81de-429dc2619c74}</Project>
       <Name>Effects</Name>
     </ProjectReference>

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWeather", "TheWeather\TheWeather.csproj", "{01DD43EC-FCA2-47FA-B5A2-7BDA6C08AAF2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Effects", "..\Effects\Effects\Effects.vcxproj", "{C9FE5439-6E2B-4FA6-81DE-429DC2619C74}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Effects", "Effects\Effects.vcxproj", "{C9FE5439-6E2B-4FA6-81DE-429DC2619C74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
